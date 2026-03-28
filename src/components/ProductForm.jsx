@@ -25,7 +25,16 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
 
   useEffect(() => {
     if (product) {
-      setFormData(product);
+      setFormData({
+        name: product.name || '',
+        description: product.description || '',
+        price: product.price || '',
+        sku: product.sku || '',
+        images: Array.isArray(product.images) ? product.images : [],
+        category: product.category || '',
+        attributes: product.attributes || {},
+        stock: product.stock || { quantity: 0, inStock: true }
+      });
     }
   }, [product]);
 
@@ -288,7 +297,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
         <div className="attribute-list">
           {Object.entries(formData.attributes).map(([key, value]) => (
             <div key={key} className="attribute-item">
-              <strong>{key}:</strong> {value}
+              <strong>{key}:</strong> {typeof value === 'object' ? JSON.stringify(value) : String(value)}
               <button type="button" onClick={() => removeAttribute(key)} className="btn-remove">
                 ×
               </button>

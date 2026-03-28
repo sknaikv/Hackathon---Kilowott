@@ -13,8 +13,8 @@ function App() {
 
   // Debug log
   useEffect(() => {
-    console.log('App state:', { products: products.length, loading, error, view });
-  }, [products, loading, error, view]);
+    console.log('App state:', { products: products.length, loading, error, view, selectedProduct: selectedProduct?.id });
+  }, [products, loading, error, view, selectedProduct]);
 
   const handleCreateProduct = async (data) => {
     try {
@@ -38,6 +38,7 @@ function App() {
   };
 
   const handleEdit = (product) => {
+    console.log('handleEdit called with product:', product);
     setSelectedProduct(product);
     setView('edit');
   };
@@ -167,16 +168,25 @@ function App() {
           </div>
         )}
 
-        {view === 'edit' && selectedProduct && (
+        {view === 'edit' && (
           <div className="form-view">
-            <ProductForm 
-              product={selectedProduct}
-              onSubmit={handleUpdateProduct}
-              onCancel={() => {
-                setView('list');
-                setSelectedProduct(null);
-              }}
-            />
+            {selectedProduct ? (
+              <>
+                {console.log('Rendering edit form with product:', selectedProduct)}
+                <ProductForm 
+                  product={selectedProduct}
+                  onSubmit={handleUpdateProduct}
+                  onCancel={() => {
+                    setView('list');
+                    setSelectedProduct(null);
+                  }}
+                />
+              </>
+            ) : (
+              <div style={{padding: '40px', textAlign: 'center', color: '#999'}}>
+                <p>Loading product...</p>
+              </div>
+            )}
           </div>
         )}
       </main>

@@ -136,10 +136,72 @@ body {
 /* Main Content */
 .app-main {
   flex: 1;
-  padding: 2.5rem 2rem;
+  padding: 2rem;
   max-width: 1600px;
   width: 100%;
   margin: 0 auto;
+}
+
+/* Views */
+.products-view {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.form-view {
+  animation: fadeIn 0.3s ease-in;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.view-header h2 {
+  color: var(--gray-900);
+  font-size: 1.875rem;
+}
+
+.filters {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filters select,
+.filters input {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--gray-300);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: white;
+}
+
+.filters input {
+  min-width: 250px;
+}
+
+.filters select:focus,
+.filters input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Buttons */
